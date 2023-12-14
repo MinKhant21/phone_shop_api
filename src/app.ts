@@ -1,23 +1,22 @@
 import express, {  Request, Response , Application } from 'express';
 import dotenv from 'dotenv';
-import cors from 'cors'
 import authRoute from './routes/auth'
+const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors');
 dotenv.config();
 
 const app: Application = express();
 
-app.use(cors());
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(morgan(`:date[clf] :method :url :status :response-time ms`));
 
+
+app.use(morgan(`:date[clf] :method :url :status :response-time ms`));
+app.use(
+     cors()
+   );
+   app.use(express.urlencoded({ extended: false }));
+   app.use(express.json());
 let prefix:any = process.env.PRE_FIX;
 app.use( prefix ,authRoute)
-
-
-app.get('/', (req: Request, res: Response) => {
-     res.send('Welcome to Express & TypeScript Server');
-});
 
 export default app;

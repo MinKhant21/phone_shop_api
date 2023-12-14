@@ -14,7 +14,6 @@ module.exports = {
      * }], {});
     */
     let data = await fatch();
-    console.log(data)
     await queryInterface.bulkInsert('users',data)
   },
 
