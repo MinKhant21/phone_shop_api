@@ -19,14 +19,16 @@ export const login = async (req:Request,res : Response)=> {
                     if(result){
                          const token =  generateToken(result['name'])
                         
-                         res.status(200).json({
+                         res.json({
+                              status : 200,
                               data:result,
                               token : token,
                               message : "Successfully Login"
                          })
                     }else{
-                         res.status(500).json({
-                              message : "Incorrect Gmail and Password "
+                         res.json({
+                              status : 500,
+                              message : "Incorrect Email and Password "
                          })
                     }
                })
