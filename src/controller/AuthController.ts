@@ -2,6 +2,7 @@
 import express, { Request, Response } from 'express';
 import { where } from 'sequelize';
 const {User} = require('../models')
+const {generateToken} = require('../helper/auth')
 interface ReqBody {
      email : string,
      password : string
@@ -14,10 +15,13 @@ export const login = async (req:Request,res : Response)=> {
                     attributes:['name','email','role',"user_id"],
                     where:{email:email}
                })
-               .then((result:string[])=>{
+               .then((result:any)=>{
                     if(result){
+                         const token =  generateToken(result['name'])
+                        
                          res.status(200).json({
                               data:result,
+                              token : token,
                               message : "Successfully Login"
                          })
                     }else{
