@@ -11,6 +11,7 @@ export const login = async (req:Request,res : Response)=> {
      try {
           await User.findOne(
                {
+                    attributes:['name','email','role',"user_id"],
                     where:{email:email}
                })
                .then((result:string[])=>{
