@@ -15,6 +15,11 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
+      image:{
+        type : DataTypes.STRING,
+        allowNull:true
+
+      },
       description: {
         type: Sequelize.STRING
       },
