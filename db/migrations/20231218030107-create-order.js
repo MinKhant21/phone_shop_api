@@ -3,19 +3,27 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Orders', {
-      id: {
+      order_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.DataTypes.UUID
       },
-      firstName: {
+      user_id:{
+        type: Sequelize.DataTypes.UUID,
+        allowNull: false,
+      },
+      product_id:{
+        type: Sequelize.DataTypes.UUID,
+        allowNull: false,
+      },
+      total_quantity: {
         type: Sequelize.STRING
       },
-      lastName: {
+      total_price: {
         type: Sequelize.STRING
       },
-      email: {
+      arrive: {
         type: Sequelize.STRING
       },
       createdAt: {
