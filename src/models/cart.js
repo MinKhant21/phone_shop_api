@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const uuid = require('uuid')
+
 module.exports = (sequelize, DataTypes) => {
   class Cart extends Model {
     /**
@@ -25,9 +27,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Cart.init({
     cart_id: {
-      allowNull: false,
       primaryKey: true,
-      type: DataTypes.UUID
+      type: DataTypes.UUID,
+      defaultValue: () => uuid.v4(),
     },
     user_id:{
       type:DataTypes.UUID,
