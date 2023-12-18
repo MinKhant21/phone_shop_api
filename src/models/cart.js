@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Cart.init({
-    order_id: {
+    cart_id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
