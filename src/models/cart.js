@@ -16,31 +16,30 @@ module.exports = (sequelize, DataTypes) => {
   Cart.init({
     cart_id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.DataTypes.UUID
+      type: DataTypes.UUID
     },
     user_id:{
-      type: Sequelize.DataTypes.UUID,
+      type:DataTypes.UUID,
       allowNull: false,
     },
     product_id:{
-      type: Sequelize.DataTypes.UUID,
+      type: DataTypes.UUID,
       allowNull: false,
     },
     total_quantity: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     total_price: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
   }, {
     sequelize,
