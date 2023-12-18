@@ -10,7 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // Associate Cart with User
+      Cart.belongsToMany(models.User, {
+        foreignKey: 'user_id', // This should match the field in the Cart model
+        onDelete: 'CASCADE' // Define the deletion behavior if the associated User is deleted
+      });
+
+      // Associate Cart with Product
+      Cart.belongsTo(models.Product, {
+        foreignKey: 'product_id', // This should match the field in the Cart model
+        onDelete: 'CASCADE' // Define the deletion behavior if the associated Product is deleted
+      });
     }
   }
   Cart.init({

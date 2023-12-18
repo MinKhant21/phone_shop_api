@@ -11,6 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Order.belongsToMany(models.User, {
+        foreignKey: 'user_id', // This should match the field in the Cart model
+        onDelete: 'CASCADE' // Define the deletion behavior if the associated User is deleted
+      });
+
+      // Associate Cart with Product
+      Order.belongsTo(models.Product, {
+        foreignKey: 'product_id', // This should match the field in the Cart model
+        onDelete: 'CASCADE' // Define the deletion behavior if the associated Product is deleted
+      });
     }
   }
   Order.init({
