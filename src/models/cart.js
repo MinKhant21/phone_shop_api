@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Associate Cart with User
-      Cart.belongsToMany(models.User, {
+      Cart.belongsTo(models.User, {
         foreignKey: 'user_id', // This should match the field in the Cart model
         onDelete: 'CASCADE' // Define the deletion behavior if the associated User is deleted
       });
