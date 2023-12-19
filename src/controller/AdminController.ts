@@ -27,7 +27,20 @@ export const delProduct =  async (req:Request,res:Response) => {
 /** User */
 
 export const getUserList = async (req:Request,res:Response) => {
-
+     try {
+          let userList = await checkUser("",{type:""});
+          res.json({
+               status:200,
+               data : userList,
+               message : "Users List"
+          }) 
+     } catch (error : any) {
+          return res.status(500).json({
+               status: 500,
+               message: error.message || "An error occurred"
+           }); 
+     }
+     
 }
 
 export const addUser = async (req: Request, res: Response) => {
@@ -38,9 +51,8 @@ export const addUser = async (req: Request, res: Response) => {
              throw new Error("Incomplete data provided");
          }
  
-         const hashPwd = await hashPassword(password);
-         const existingUser = await checkUser(email);
- 
+         const hashPwd =  hashPassword(password);
+         const existingUser = await checkUser(email,{type:"ADD"});
          if (existingUser) {
              return res.status(500).json({
                  status: 500,
@@ -70,10 +82,41 @@ export const addUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req:Request,res:Response) => {
 
+     let id = req.query.id
+     let {name,email,password} = req.body
+
+     let existingUser = await checkUser(id,{type:"FIND_ID"})
+     if(existingUser){
+          const hashPwd = hashPassword(password);
+          let updatedUser = await User.update({name,email,hashPwd},{where:{'user_id':id}})
+          res.json({
+               status:200,
+               data:updatedUser,
+               message : "Successfully Updated User"
+          })
+     }else{
+          res.json({
+               status:200,
+               message : "Does not exit User"
+          })
+     }
 }
 
 export const delUser = async (req:Request,res:Response) => {
-
+     let id = req.query.id
+     let existingUser = await checkUser(id,{type:"FIND_ID"})
+     if(existingUser){
+          await User.destroy({where:{'user_id':id}})
+          res.json({
+               status:200,
+               message : "Successfully Deleted User"
+          })
+     }else{
+          res.json({
+               status:200,
+               message : "Does not exit User"
+          })
+     }
 }
 
 
