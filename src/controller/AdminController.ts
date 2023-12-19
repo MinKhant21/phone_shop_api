@@ -3,6 +3,16 @@ import { where } from 'sequelize';
 const {hashPassword } = require('../helper/auth')
 const {Category,User} = require('../models')
 const {checkUser} = require('../helper/common')
+
+interface userBoy{
+     name ?: string,
+     email ?: string,
+     password?:string
+}
+
+interface categoryBoy {
+     name : String
+}
 /** Products */
 export const getProduct =  async (req:Request,res:Response) => {
 
@@ -45,7 +55,7 @@ export const getUserList = async (req:Request,res:Response) => {
 
 export const addUser = async (req: Request, res: Response) => {
      try {
-         const { name, email, password } = req.body;
+         const { name, email, password } : userBoy = req.body;
  
          if (!(name && email && password)) {
              throw new Error("Incomplete data provided");
@@ -83,7 +93,7 @@ export const addUser = async (req: Request, res: Response) => {
 export const updateUser = async (req:Request,res:Response) => {
 
      let id = req.query.id
-     let {name,email,password} = req.body
+     let {name,email,password} : userBoy = req.body
 
      let existingUser = await checkUser(id,{type:"FIND_ID"})
      if(existingUser){
@@ -134,7 +144,7 @@ export const getCategory = async (req:Request,res:Response) => {
 }
 
 export const addCategory = async (req:Request,res:Response) => {
-     let {...data} = req.body
+     let {...data} :categoryBoy= req.body
      let category = await Category.create({name:data.name})
      res.json({
           status : 200,
