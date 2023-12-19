@@ -14,8 +14,9 @@ app.use(morgan(`:date[clf] :method :url :status :response-time ms`));
 app.use(
      cors()
    );
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
 
 let prefix:any = process.env.PRE_FIX;
 app.use( prefix ,authRoute)
