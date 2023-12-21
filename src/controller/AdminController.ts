@@ -19,11 +19,8 @@ export const getProduct =  async (req:Request,res:Response) => {
 }
 
 export const addProduct =  async (req:Request,res:Response) => {
-     let {...data} = req.body
      console.log(req.body)
-     res.json({
-          data:data
-     })
+     console.log(req.query)
 }
 
 export const updateProduct =  async (req:Request,res:Response) => {
@@ -61,7 +58,8 @@ export const addUser = async (req: Request, res: Response) => {
              throw new Error("Incomplete data provided");
          }
  
-         const hashPwd =  hashPassword(password);
+         const hashPwd = await hashPassword(password);
+         console.log(hashPwd)
          const existingUser = await checkUser(email,{type:"ADD"});
          if (existingUser) {
              return res.status(500).json({
@@ -87,9 +85,8 @@ export const addUser = async (req: Request, res: Response) => {
              message: error.message || "An error occurred"
          });
      }
- };
+};
  
-
 export const updateUser = async (req:Request,res:Response) => {
 
      let id = req.query.id
@@ -128,7 +125,6 @@ export const delUser = async (req:Request,res:Response) => {
           })
      }
 }
-
 
 /** Category */
 
@@ -170,9 +166,8 @@ export const updateCategory = async (req:Request,res:Response) => {
                message : "Wrond Category Id"
           })
      }
- }
+}
  
-
 export const delCategory = async (req:Request,res:Response) => {
      let category =     await Category.destroy({
                where:{

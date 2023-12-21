@@ -18,7 +18,6 @@ export const login = async (req:Request,res : Response)=> {
                .then((result:any)=>{
                     if(result){
                          const token =  generateToken(result['name'])
-                        
                          res.json({
                               status : 200,
                               data:result,

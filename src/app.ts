@@ -16,7 +16,7 @@ app.use(
    );
 app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended:false}));
 
 let prefix:any = process.env.PRE_FIX;
 app.use( prefix ,authRoute)
