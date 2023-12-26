@@ -20,7 +20,7 @@ export const getProduct =  async (req:Request,res:Response) => {
 
 export const addProduct =  async (req:Request,res:Response) => {
      console.log(req.body)
-     console.log(req.query)
+     console.log('hit')
 }
 
 export const updateProduct =  async (req:Request,res:Response) => {

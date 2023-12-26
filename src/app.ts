@@ -1,25 +1,28 @@
-import express, {  Request, Response , Application } from 'express';
-import dotenv from 'dotenv';
-import authRoute from './routes/auth'
+import express, { Request, Response, Application } from 'express';
+const multer = require('multer');
+const dotenv = require('dotenv');
+const cors  = require('cors')
+const morgan  = require('morgan')
+import authRoute from './routes/auth';
 import adminRoutes from './routes/admin/admin';
-const bodyParser = require('body-parser')
-const morgan = require('morgan')
-const cors = require('cors');
-const verifyToken = require('./middleware/verify-token')
+
 dotenv.config();
 
 const app: Application = express();
 
-app.use(morgan(`:date[clf] :method :url :status :response-time ms`));
-app.use(
-     cors()
-   );
+// Set up body-parser middleware to parse application/x-www-form-urlencoded and application/json
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(express.urlencoded({extended:false}));
 
-let prefix:any = process.env.PRE_FIX;
-app.use( prefix ,authRoute)
-app.use( prefix ,verifyToken,adminRoutes)
+// Other middleware
+app.use(morgan(`:date[clf] :method :url :status :response-time ms`));
+// Uncomment the cors middleware
+app.use(cors());
+
+let prefix: any = process.env.PRE_FIX;
+app.use(prefix, authRoute);
+app.use(prefix, adminRoutes);
 
 export default app;
