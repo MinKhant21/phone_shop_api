@@ -36,9 +36,14 @@ export const delProduct =  async (req:Request,res:Response) => {
 export const getUserList = async (req:Request,res:Response) => {
      try {
           let userList = await checkUser("",{type:""});
+          let users =  userList.filter((user:any)=>{
+                         if( user.role != "admin"){
+                              return user
+                         }
+                    })
           res.json({
                status:200,
-               data : userList,
+               data : users,
                message : "Users List"
           }) 
      } catch (error : any) {

@@ -17,8 +17,9 @@ exports.checkUser = async (data,{type}) => {
                })
           default:
                return await User.findAll({
-                    attributes:['user_id','name','email']
+                    attributes:['user_id','name','email','role']
                })
+               
      }
      
 }
