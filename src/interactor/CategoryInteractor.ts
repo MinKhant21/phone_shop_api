@@ -1,10 +1,9 @@
 const {Category} = require('../models')
 
-export const getCategoryInteractor = async () => {
+export const getCategoryInteractor = async (getCategoryPersistence : Function) => {
      try {
-          return await Category.findAll({
-               attributes:['category_id','name']
-          });  
+          return await getCategoryPersistence()
+           
      } catch (error:any) {
           throw error(error)
      }
@@ -25,6 +24,15 @@ export const updateCategoryInteractor  = async ({updateCategoryPersistence} : an
       
      try {
          return await updateCategoryPersistence({name,category_id});
+     } catch (error:any) {
+          return error
+     }
+}
+
+export const delCategoryInteractor  = async ({delCategoryPersistence} : any, category_id : any ) => {
+      
+     try {
+         return await delCategoryPersistence(category_id);
      } catch (error:any) {
           return error
      }

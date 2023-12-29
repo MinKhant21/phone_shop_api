@@ -17,9 +17,9 @@ const adminRoutes = Router();
 // adminRoutes.delete('/user',AdminController.delUser);
 
 // /** Category  */
-// adminRoutes.get('/category',AdminController.getCategory);
+adminRoutes.get('/category',AdminController.getCategory);
 adminRoutes.post('/category',AdminController.addCategory);
 adminRoutes.patch('/category',AdminController.updateCategory);
-// adminRoutes.delete('/category',AdminController.delCategory);
+adminRoutes.delete('/category',AdminController.delCategory);
 
 export default adminRoutes

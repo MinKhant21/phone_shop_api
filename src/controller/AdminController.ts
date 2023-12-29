@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 
-import { getCategoryInteractor ,addCategoryInteractor,updateCategoryInteractor} from '../interactor/CategoryInteractor';
-import {addCategoryPersistence,updateCategoryPersistence} from '../persistence/createCategoryPersistence'
+import { getCategoryInteractor ,addCategoryInteractor,updateCategoryInteractor,delCategoryInteractor} from '../interactor/CategoryInteractor';
+import {addCategoryPersistence,updateCategoryPersistence,getCategoryPersistence,delCategoryPersistence} from '../persistence/createCategoryPersistence'
 const {hashPassword } = require('../helper/auth')
 const {checkUser} = require('../helper/common')
 
@@ -131,16 +131,16 @@ const {checkUser} = require('../helper/common')
 
 // /** Category */
 
-// export const getCategory = async (req:Request,res:Response) => {
+export const getCategory = async (req:Request,res:Response) => {
 
-//      let categories = await getCategoryInteractor();
+     let categories = await getCategoryInteractor(getCategoryPersistence);
     
-//      res.json({
-//           status : 200,
-//           categories : categories ,
-//           message : "Categories List"
-//      });
-// }
+     res.json({
+          status : 200,
+          categories : categories ,
+          message : "Categories List"
+     });
+}
 
 export const addCategory = async (req:Request,res:Response) => {
 
@@ -175,24 +175,24 @@ export const updateCategory = async (req:Request,res:Response) => {
      }
 }
  
-// export const delCategory = async (req:Request,res:Response) => {
-//      let category =     await Category.destroy({
-//                where:{
-//                     'category_id' : req.query.id
-//                }
-//           })
-//      if(category){
-//           res.json({
-//                status:200,
-//                message : "Successfully Deleted"
-//           })
-//      }else{
-//           res.json({
-//                status:500,
-//                message : "Wrond Category Id"
-//           })
-//      }
-// }
+export const delCategory = async (req:Request,res:Response) => {
+
+     let category_id : any = req.query.id
+
+     let category = await delCategoryInteractor({delCategoryPersistence},category_id)
+    
+     if(category){
+          res.json({
+               status:200,
+               message : "Successfully Deleted"
+          })
+     }else{
+          res.json({
+               status:500,
+               message : "Wrond Category Id"
+          })
+     }
+}
 
 
 

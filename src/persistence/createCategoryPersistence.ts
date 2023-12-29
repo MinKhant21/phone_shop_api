@@ -2,6 +2,16 @@ import { where } from "sequelize"
 
 const {Category} = require('../models')
 
+export const getCategoryPersistence = async () => {
+   try {
+        return await Category.findAll({
+            attributes:['category_id','name']
+        }); 
+   } catch (error) {
+    
+   }
+}
+
 export const addCategoryPersistence = async (name:string)  => {
      try {
           let category = await Category.findOne({where:{name:name}})
@@ -39,3 +49,22 @@ export const updateCategoryPersistence = async ({ name, category_id }: any) => {
          return error;
      }
  };
+
+
+ export const delCategoryPersistence = async (category_id:string)  => {
+    try {
+         let category = await Category.findOne({where:{category_id:category_id}})
+         if(!category) {
+            return null
+         }else{
+            return await Category.destroy({
+                where:{
+                     'category_id' : category_id
+                }
+            })
+        }
+
+    } catch (error:any) {
+         throw error(error)
+    }
+}
