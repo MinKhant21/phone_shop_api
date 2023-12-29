@@ -20,3 +20,12 @@ export const addCategoryInteractor = async ({addCategoryPersistence}:any,name:st
           throw error(error)
      }
 }
+
+export const updateCategoryInteractor  = async ({updateCategoryPersistence} : any,{name,category_id} : any ) => {
+      
+     try {
+         return await updateCategoryPersistence({name,category_id});
+     } catch (error:any) {
+          return error
+     }
+}

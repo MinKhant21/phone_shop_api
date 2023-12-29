@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 
-import { getCategoryInteractor ,addCategoryInteractor} from '../interactor/CategoryInteractor';
-import {addCategoryPersistence} from '../persistence/createCategoryPersistence'
+import { getCategoryInteractor ,addCategoryInteractor,updateCategoryInteractor} from '../interactor/CategoryInteractor';
+import {addCategoryPersistence,updateCategoryPersistence} from '../persistence/createCategoryPersistence'
 const {hashPassword } = require('../helper/auth')
 const {checkUser} = require('../helper/common')
 
@@ -155,24 +155,25 @@ export const addCategory = async (req:Request,res:Response) => {
      })
 }
 
-// export const updateCategory = async (req:Request,res:Response) => {
-//      let category = await Category.update({name:req.body.name},{
-//           where:{
-//                'category_id' : req.query.id
-//           }
-//      })
-//      if(category){
-//           res.json({
-//                status:200,
-//                message : "Successfully Updated"
-//           })
-//      }else{
-//           res.json({
-//                status:500,
-//                message : "Wrond Category Id"
-//           })
-//      }
-// }
+export const updateCategory = async (req:Request,res:Response) => {
+     const name : string= req.body.name;
+     const category_id : any = req.query.id
+     
+     const category = await updateCategoryInteractor({updateCategoryPersistence},{name,category_id})
+   
+     if(category != null){
+          res.json({
+               status:200,
+               data : category,
+               message : "Successfully Updated"
+          })
+     }else{
+          res.json({
+               status:500,
+               message : "Wrond Category Id"
+          })
+     }
+}
  
 // export const delCategory = async (req:Request,res:Response) => {
 //      let category =     await Category.destroy({
