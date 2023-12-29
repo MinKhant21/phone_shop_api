@@ -5,21 +5,21 @@ const adminRoutes = Router();
 
 
 /** Product  */
-adminRoutes.get('/category',AdminController.getCategory);
-adminRoutes.post('/product/create',AdminController.addProduct);
-adminRoutes.patch('/category',AdminController.updateCategory);
-adminRoutes.delete('/category',AdminController.delCategory);
+// adminRoutes.get('/category',AdminController.getCategory);
+// adminRoutes.post('/product/create',AdminController.addProduct);
+// adminRoutes.patch('/category',AdminController.updateCategory);
+// adminRoutes.delete('/category',AdminController.delCategory);
 
-/** User  */
-adminRoutes.get('/user-list',AdminController.getUserList);
-adminRoutes.post('/user',AdminController.addUser);
-adminRoutes.patch('/user',AdminController.updateUser);
-adminRoutes.delete('/user',AdminController.delUser);
+// /** User  */
+// adminRoutes.get('/user-list',AdminController.getUserList);
+// adminRoutes.post('/user',AdminController.addUser);
+// adminRoutes.patch('/user',AdminController.updateUser);
+// adminRoutes.delete('/user',AdminController.delUser);
 
-/** Category  */
-adminRoutes.get('/category',AdminController.getCategory);
+// /** Category  */
+// adminRoutes.get('/category',AdminController.getCategory);
 adminRoutes.post('/category',AdminController.addCategory);
-adminRoutes.patch('/category',AdminController.updateCategory);
-adminRoutes.delete('/category',AdminController.delCategory);
+// adminRoutes.patch('/category',AdminController.updateCategory);
+// adminRoutes.delete('/category',AdminController.delCategory);
 
 export default adminRoutes
