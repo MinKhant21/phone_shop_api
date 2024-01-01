@@ -8,7 +8,7 @@ export const getCategoryPersistence = async () => {
             attributes:['category_id','name']
         }); 
    } catch (error) {
-    
+    console.log(error)
    }
 }
 
