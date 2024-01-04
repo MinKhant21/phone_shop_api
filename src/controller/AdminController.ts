@@ -191,7 +191,6 @@ export const addCategory = async (req: Request, res: Response) => {
 export const updateCategory = async (req: Request, res: Response) => {
   const name: string = req.body.name;
   const category_id: any = req.query.id;
-
   const category = await updateCategoryInteractor(
     { updateCategoryPersistence },
     { name, category_id }
