@@ -24,11 +24,15 @@ export const searchByID = async (req: Request, res: Response) => {
     if (!id || !module) {
       throw new Error("ID or Module not provided");
     }
-
-    await searchByIdInteractor({ searchByIdPersistence }, id, module);
-
+    let data = await searchByIdInteractor(
+      { searchByIdPersistence },
+      id,
+      module
+    );
     // Respond with success message or appropriate response
-    //   res.status(200).json({ message: 'Search by ID and module successful' });
+    res
+      .status(200)
+      .json({ data, message: "Search by ID and module successful" });
   } catch (error) {
     // Handle errors or respond with error message
     //   res.status(400).json({ error: error.message });
